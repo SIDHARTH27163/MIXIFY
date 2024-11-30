@@ -17,7 +17,7 @@ class PrivacySettingsController extends Controller
             'content_visibility' => 'everyone',
         ]);
 
-        return view('settings::index', compact('privacySettings'));
+        return view('settings::PrivacySettings.index', compact('privacySettings'));
     }
 
     public function update(Request $request)

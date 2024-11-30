@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer base {
+    @font-face {
+      font-family: 'Roboto';
+      src: url(./fonts/RobotoCondensed-Medium.ttf) format('truetype');
+    }
+    @font-face {
+        font-family: 'Robotoslab';
+        src: url(./fonts/RobotoSlab-Medium.ttf) format('truetype');
+      }
+    @font-face {
+        font-family: 'ubuntu';
+        src: url(./fonts/Ubuntu-Regular.ttf) format('truetype');
+      }
+      @font-face {
+        font-family: 'poppins';
+        src: url(./fonts/Poppins-Regular.ttf) format('truetype');
+      }
+      
+      @font-face {
+        font-family: 'Montserrat';
+        src: url(./fonts/Montserrat-Regular.ttf) format('truetype');
+      }
+  }

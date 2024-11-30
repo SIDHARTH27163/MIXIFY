@@ -13,9 +13,15 @@ export default {
 
     theme: {
         extend: {
-            fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-            },
+            fontFamily:{
+                Roboto:['Roboto'],
+                Robotoslab:['Robotoslab'],
+              
+                Montserrat:['Montserrat'],
+                ubuntu:['ubuntu'],
+                poppins:['poppins']
+          
+              }
         },
     },
 
