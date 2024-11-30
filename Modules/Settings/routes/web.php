@@ -5,7 +5,7 @@ use Modules\Settings\Http\Controllers\PrivacySettingsController;
 use Modules\Settings\Http\Controllers\NotificationSettingsController;
 use Modules\Settings\Http\Controllers\ContentSettingController;
 use Modules\Settings\Http\Controllers\CommunicationPersonalizationController;
-
+use Modules\Settings\Http\Controllers\UserSettingsController;
 Route::middleware(['auth'])->prefix('settings')->name('settings.')->group(function () {
     // General Settings CRUD
     Route::resource('/', PrivacySettingsController::class)->names([
@@ -27,5 +27,7 @@ Route::middleware(['auth'])->prefix('settings')->name('settings.')->group(functi
     Route::put('/content', [ContentSettingController::class, 'update'])->name('content.update');
     Route::get('/communicationpersonalization', [CommunicationPersonalizationController::class, 'edit'])->name('communicationpersonalization');
     Route::put('/communicationpersonalization', [CommunicationPersonalizationController::class, 'update'])->name('communicationpersonalization.update');
+    Route::get('/usersettings', [UserSettingsController::class, 'index'])->name('usersettings.index');
+    Route::put('/usersettings', [UserSettingsController::class, 'update'])->name('usersettings.update');
 });
 
