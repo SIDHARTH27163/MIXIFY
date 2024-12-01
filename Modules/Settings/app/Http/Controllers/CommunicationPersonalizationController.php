@@ -65,7 +65,7 @@ class CommunicationPersonalizationController extends Controller
             return back()->with('success', 'Settings updated successfully.');
         } catch (\Exception $e) {
             \Log::error('Content Settings Update Error', ['error' => $e->getMessage()]);
-            dd($e->getMessage());
+            // dd($e->getMessage());
             return redirect()->back()->withErrors('Failed to update settings. Please try again.');
         }
     }

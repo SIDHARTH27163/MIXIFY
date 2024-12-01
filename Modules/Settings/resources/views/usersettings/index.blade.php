@@ -18,7 +18,7 @@
 
         <h2 class="text-xl font-Robotoslab tracking-wide  font-semibold mb-6 text-gray-900 dark:text-gray-100">Manage Your Settings</h2>
 
-        <form action="{{ route('settings.usersettings.update') }}" method="POST">
+        <form action="{{ route('settings.personalization.update') }}" method="POST">
             @csrf
             @method('PUT')
 
