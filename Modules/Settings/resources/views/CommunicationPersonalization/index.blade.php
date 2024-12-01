@@ -18,7 +18,7 @@
     <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6 font-Roboto leading-10 tracking-wide">Update Communication Settings</h2>
 
     <!-- Form to update settings -->
-    <form action="{{ route('settings.communicationpersonalization.update') }}" method="POST">
+    <form action="{{ route('settings.communication.update') }}" method="POST">
         @csrf
         @method('PUT')
 

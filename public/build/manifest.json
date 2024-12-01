@@ -1,11 +1,31 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-B2xY4TSs.css",
+    "file": "assets/app-ByX3Vpf4.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
+  "resources/css/fonts/Montserrat-Regular.ttf": {
+    "file": "assets/Montserrat-Regular-Cw3fqWkz.ttf",
+    "src": "resources/css/fonts/Montserrat-Regular.ttf"
+  },
+  "resources/css/fonts/Poppins-Regular.ttf": {
+    "file": "assets/Poppins-Regular-CTKNfV9P.ttf",
+    "src": "resources/css/fonts/Poppins-Regular.ttf"
+  },
+  "resources/css/fonts/RobotoCondensed-Medium.ttf": {
+    "file": "assets/RobotoCondensed-Medium-CaNzTVZO.ttf",
+    "src": "resources/css/fonts/RobotoCondensed-Medium.ttf"
+  },
+  "resources/css/fonts/RobotoSlab-Medium.ttf": {
+    "file": "assets/RobotoSlab-Medium-DIr-R0Br.ttf",
+    "src": "resources/css/fonts/RobotoSlab-Medium.ttf"
+  },
+  "resources/css/fonts/Ubuntu-Regular.ttf": {
+    "file": "assets/Ubuntu-Regular-D14tH6yt.ttf",
+    "src": "resources/css/fonts/Ubuntu-Regular.ttf"
+  },
   "resources/js/app.js": {
-    "file": "assets/app-BjCBnTiP.js",
+    "file": "assets/app-1K_aiQd8.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
