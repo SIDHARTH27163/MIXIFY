@@ -11,14 +11,14 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="dark:bg-gray-900 bg-gray-50">
+    <body class="dark:bg-gray-950 bg-gray-50">
      
 
     <div class="h-screen w-screen flex overflow-y-auto">
         <!-- container -->
     
         <aside
-            class="hidden lg:flex flex-col items-center bg-white dark:bg-slate-950 text-gray-700 shadow
+            class="hidden lg:flex flex-col items-center bg-white dark:bg-gray-950 text-gray-700 shadow
             h-full">
             <!-- Side Nav Bar-->
     
@@ -38,7 +38,7 @@
                 </li>
                 <li class="dark:hover:bg-gray-800 hover:bg-gray-100">
                     <a
-                        href="."
+                        href="/posts/create"
                         class="h-16 px-6  flex justify-center items-center w-full
                         focus:text-orange-500">
                        
@@ -149,7 +149,7 @@
         </aside>
     
         <div class="flex-1 flex flex-col">
-            <nav class="px-4 flex justify-between bg-white dark:bg-slate-950 h-auto py-2">
+            <nav class=" flex justify-between bg-white dark:bg-gray-950 h-auto py-2">
                 <!-- top bar -->
     
                
@@ -165,14 +165,14 @@
     
                 <ul class="flex items-center">
                     <!-- to bar right  -->
-                    <li class="pr-4">
+                    <li class="">
                         <label class="inline-flex items-center cursor-pointer mx-4">
                             <input type="checkbox" id="theme-toggle" class="sr-only peer">
                             <div class="relative w-11 h-6 bg-slate-900 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 dark:peer-focus:ring-gray-100 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-gray-400 after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gray-400"></div>
                             
                           </label>
                     </li>
-                    <li class="pr-4">
+                    <li class="">
                         <svg
                         class="text-gray-800 dark:text-white"
                             xmlns="http://www.w3.org/2000/svg"
@@ -209,7 +209,7 @@
         </div>
     
         <nav
-            class="fixed bottom-0 w-full border bg-white dark:bg-slate-950 lg:hidden flex py-2
+            class="fixed bottom-0 w-full  bg-white dark:bg-slate-950 lg:hidden flex py-2
             overflow-x-auto">
             <!-- Bottom Icon Navigation Menu -->
     
