@@ -2,14 +2,19 @@
 use App\Http\Middleware\TwoFactorAuthenticated;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Modules\Posts\Http\Controllers\CreatePostsController;
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+Route::get('/posts', [CreatePostsController::class, 'index'])->name('posts');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', function () {
+    return view('home');
+})->middleware(['auth', 'verified', TwoFactorAuthenticated::class])->name('home');
 Route::get('/home', function () {
     return view('home');
 })->middleware(['auth', 'verified', TwoFactorAuthenticated::class])->name('home');

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 class RouteServiceProvider extends ServiceProvider
 {
     protected string $name = 'Posts';
+    protected $moduleNamespace = 'Modules\\Posts\\Http\\Controllers';
 
     /**
      * Called before routes are registered.
@@ -35,7 +36,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes(): void
     {
-        Route::middleware('web')->group(module_path($this->name, '/routes/web.php'));
+        Route::middleware('web')
+         ->namespace($this->moduleNamespace)
+         ->group(module_path('Posts', '/Routes/web.php'));
     }
 
     /**

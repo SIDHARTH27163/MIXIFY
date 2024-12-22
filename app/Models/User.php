@@ -12,7 +12,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /** @use HasFactory<\Database\Factories\UserFactory> */
     // use HasFactory, Notifiable;
     use  Notifiable, TwoFactorAuthenticatable;
-
+    use HasFactory;
     /**
      * The attributes that are mass assignable.
      *
@@ -22,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'avatar','username', 
     ];
 
     /**
