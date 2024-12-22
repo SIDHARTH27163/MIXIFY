@@ -184,13 +184,13 @@
                           <div class="flex gap-x-2">
                               <div class="flex-shrink-0">
                                   <img
-                                  class="h-16 w-16 rounded-full mx-auto object-cover"
-                                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                                  alt="profile woman" />
+                                  class="h-14 w-14 rounded-full mx-auto object-cover"
+                                  src="{{ Auth::user()->avatar }}"
+                                  alt="{{ Auth::user()->name }}" />
                               </div>
                               <div>
-                                  <a href="/guleria_sid/" class="text-ls font-semibold dark:text-gray-100 text-gray-800 font-Roboto tracking-widest">guleria_sid</a>
-                                  <p class="text-xs dark:text-gray-100 text-gray-700 font-poppins font-semibold leading-6 whitespace-nowrap">SIDHARTH SINGH GULERIA</p>
+                                  <a href="/guleria_sid/" class="text-ls font-semibold dark:text-gray-100 text-gray-800 font-Roboto tracking-widest">{{ Auth::user()->username }}</a>
+                                  <p class="text-xs dark:text-gray-100 text-gray-700 font-poppins font-semibold leading-6 whitespace-nowrap">{{ Auth::user()->name }}</p>
                               </div>
                           </div>
                           <div class="flex flex-col justify-end">
@@ -228,8 +228,8 @@
                                   alt="profile woman" />
                               </div>
                               <div>
-                                  <a href="/guleria_sid/" class="text-ls font-semibold dark:text-gray-900 text-gray-50 font-Roboto tracking-widest">{{ $user->name }}</a>
-                                  <p class="text-xs dark:text-gray-800 text-gray-100 font-poppins font-semibold leading-6 whitespace-nowrap">SIDHARTH SINGH GULERIA</p>
+                                  <a href="/guleria_sid/" class="text-ls font-semibold dark:text-gray-900 text-gray-50 font-Roboto tracking-widest">{{ $user->username }}</a>
+                                  <p class="text-xs dark:text-gray-800 text-gray-100 font-poppins font-semibold leading-6 whitespace-nowrap">{{ $user->name }}</p>
                               </div>
                           </div>
                           <div class="flex flex-col justify-end">

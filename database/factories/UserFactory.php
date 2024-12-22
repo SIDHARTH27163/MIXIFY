@@ -23,6 +23,7 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
+            'username' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'password' => bcrypt('password123'), // Or use Hash::make('password123')
             'avatar' => $this->faker->imageUrl(200, 200, 'people', true), // Avatar URL
