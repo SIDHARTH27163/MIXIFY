@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\Posts\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Cloudinary\Cloudinary;
+
 
 class CreatePostsController extends Controller
 {
@@ -33,40 +35,45 @@ class CreatePostsController extends Controller
     {
         try {
             // Extract fields from the request
-            $data = $request->only(['title', 'caption', 'tags', 'location', 'media']);
+            $data = $request->only(['title', 'caption', 'tags', 'location']);
             
-            // Ensure the tags are separated by commas
+            // Normalize tags
             if (!empty($data['tags'])) {
-                // Clean and normalize tags input
-                $tags = explode(',', $data['tags']); // Split by commas
-                $tags = array_map('trim', $tags); // Trim whitespace around each tag
-                $tags = array_filter($tags); // Remove empty values
-                $data['tags'] = implode(', ', $tags); // Rejoin into a comma-separated string
+                $tags = explode(',', $data['tags']);
+                $tags = array_map('trim', $tags);
+                $tags = array_filter($tags);
+                $data['tags'] = implode(', ', $tags);
             }
-            
+
             // Add the authenticated user's ID
             $data['user_id'] = auth()->id();
-    
-            // Handle media uploads
+
+            // Handle media uploads using Cloudinary
             if ($request->file('media')) {
-                $data['media'] = array_map(
-                    fn($media) => $media->store('uploads/posts', 'public'),
-                    $request->file('media')
-                );
+                $cloudinary = new Cloudinary(config('services.cloudinary.url'));
+                $uploadedMedia = [];
+
+                foreach ($request->file('media') as $media) {
+                    $uploadResult = $cloudinary->uploadApi()->upload($media->getPathName(), [
+                        'folder' => 'posts/' . auth()->id(), // Organize by user ID
+                    ]);
+                    $encodedUrl = base64_encode($uploadResult['secure_url']); // Encode the URL
+                    $uploadedMedia[] = $encodedUrl;
+                }
+
+                $data['media'] = json_encode($uploadedMedia); // Store as JSON in the database
             }
-    
+
             // Save the post to the database
             Post::create($data);
-    
+
             return redirect()->route('posts.index')->with('success', 'Post created successfully.');
         } catch (\Exception $e) {
-            // Log the error for debugging
             \Log::error('Post Creation Error', ['error' => $e->getMessage()]);
-            // Redirect back with an error message
             return redirect()->back()->withErrors('Failed to create post. Please try again.');
         }
     }
-    
+
 
 
     /**
@@ -91,41 +98,46 @@ class CreatePostsController extends Controller
      * Update the specified post in storage.
      */
     public function update(Request $request, $id)
-        {
-            try {
-                // Find the post or fail if not found
-                $post = Post::findOrFail($id);
+    {
+        try {
+            $post = Post::findOrFail($id);
 
-                // Extract fields from the request
-                $data = $request->only(['title', 'caption', 'tags', 'location', 'media']);
+            // Extract fields from the request
+            $data = $request->only(['title', 'caption', 'tags', 'location']);
 
-                // Normalize tags to ensure they are comma-separated
-                if (!empty($data['tags'])) {
-                    $tags = explode(',', $data['tags']); // Split by commas
-                    $tags = array_map('trim', $tags); // Trim whitespace around each tag
-                    $tags = array_filter($tags); // Remove empty values
-                    $data['tags'] = implode(', ', $tags); // Rejoin into a comma-separated string
-                }
-
-                // Handle media uploads if provided
-                if ($request->file('media')) {
-                    $data['media'] = array_map(
-                        fn($media) => $media->store('uploads/posts', 'public'),
-                        $request->file('media')
-                    );
-                }
-
-                // Update the post in the database
-                $post->update($data);
-
-                return redirect()->route('posts.index')->with('success', 'Post updated successfully.');
-            } catch (\Exception $e) {
-                // Log the error for debugging
-                \Log::error('Post Update Error', ['error' => $e->getMessage()]);
-                // Redirect back with an error message
-                return redirect()->back()->withErrors('Failed to update the post. Please try again.');
+            // Normalize tags
+            if (!empty($data['tags'])) {
+                $tags = explode(',', $data['tags']);
+                $tags = array_map('trim', $tags);
+                $tags = array_filter($tags);
+                $data['tags'] = implode(', ', $tags);
             }
+
+            // Handle media uploads using Cloudinary
+            if ($request->file('media')) {
+                $cloudinary = new Cloudinary(config('services.cloudinary.url'));
+                $uploadedMedia = [];
+
+                foreach ($request->file('media') as $media) {
+                    $uploadResult = $cloudinary->uploadApi()->upload($media->getPathName(), [
+                        'folder' => 'posts/' . auth()->id(),
+                    ]);
+                    $encodedUrl = base64_encode($uploadResult['secure_url']); // Encode the URL
+                    $uploadedMedia[] = $encodedUrl;
+                }
+
+                $data['media'] = json_encode($uploadedMedia); // Update media in the database
+            }
+
+            // Update the post in the database
+            $post->update($data);
+
+            return redirect()->route('posts.index')->with('success', 'Post updated successfully.');
+        } catch (\Exception $e) {
+            \Log::error('Post Update Error', ['error' => $e->getMessage()]);
+            return redirect()->back()->withErrors('Failed to update the post. Please try again.');
         }
+    }
 
 
     /**

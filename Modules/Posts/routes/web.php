@@ -3,18 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Posts\Http\Controllers\PostsController;
 use Modules\Posts\Http\Controllers\CreatePostsController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 Route::middleware(['auth'])->prefix('posts')->name('posts.')->group(function () {
-    Route::resource('/', PostsController::class)->parameters(['' => 'post'])->names([
+    // Fix the resource route
+    Route::resource('/home', PostsController::class)->parameters(['' => 'post'])->names([
         'index' => 'index',
         'create' => 'create',
         'store' => 'store',
@@ -23,6 +15,8 @@ Route::middleware(['auth'])->prefix('posts')->name('posts.')->group(function () 
         'update' => 'update',
         'destroy' => 'destroy',
     ]);
+    
+    // Add individual routes for CreatePostsController
     Route::get('/create', [CreatePostsController::class, 'create'])->name('create');
     Route::post('/store', [CreatePostsController::class, 'store'])->name('store');
     Route::get('/{id}', [CreatePostsController::class, 'show'])->name('show');

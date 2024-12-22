@@ -1,5 +1,6 @@
 <x-home-layout>
     <div class="font-poppins max-w-7xl mx-auto p-5 gap-4 dark:text-white text-black">
+        
         <div class="mx-auto p-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg max-w-4xl grid grid-cols-2 gap-4">
             <!-- Preview Container -->
             <div id="preview-container" class="h-full bg-gray-50 dark:bg-gray-800 p-4 rounded-lg overflow-auto flex flex-col items-center justify-center border border-gray-300 dark:border-gray-600">
@@ -86,33 +87,54 @@
         });
 
         const fileInput = document.getElementById('dropzone-file');
-        const previewContainer = document.getElementById('preview-container');
+const previewContainer = document.getElementById('preview-container');
 
-        fileInput.addEventListener('change', function () {
-            // Clear previous previews
-            previewContainer.innerHTML = '';
+fileInput.addEventListener('change', function () {
+    // Clear previous previews
+    previewContainer.innerHTML = '';
 
-            // Show previews for all selected files
-            Array.from(fileInput.files).forEach((file) => {
-                const reader = new FileReader();
+    const files = Array.from(fileInput.files);
 
-                reader.onload = (e) => {
-                    const previewElement = document.createElement('div');
-                    previewElement.classList.add('relative', 'h-full', 'w-full', 'rounded', 'overflow-hidden', 'shadow-md');
+    if (files.length === 0) {
+        // Reset preview area if no files are selected
+        previewContainer.innerHTML = `
+            <div class="text-center text-gray-500 dark:text-gray-400">
+                <p class="text-lg font-semibold mb-4">Preview Area</p>
+                <p class="text-sm">Uploaded images and videos will appear here</p>
+            </div>
+        `;
+        return;
+    }
 
-                    // Add an image or video tag depending on file type
-                    if (file.type.startsWith('image/')) {
-                        previewElement.innerHTML = `<img src="${e.target.result}" alt="${file.name}" class="object-cover h-full w-full">`;
-                    } else if (file.type.startsWith('video/')) {
-                        previewElement.innerHTML = `<video src="${e.target.result}" controls class="object-cover h-full w-full"></video>`;
-                    }
+    // Add grid layout for multiple files
+    if (files.length > 1) {
+        previewContainer.classList.add('grid', 'grid-cols-2', 'gap-4', 'sm:grid-cols-3');
+    } else {
+        previewContainer.classList.remove('grid', 'grid-cols-2', 'gap-4', 'sm:grid-cols-3');
+    }
 
-                    previewContainer.appendChild(previewElement);
-                };
+    // Show previews for all selected files
+    files.forEach((file) => {
+        const reader = new FileReader();
 
-                reader.readAsDataURL(file);
-            });
-        });
+        reader.onload = (e) => {
+            const previewElement = document.createElement('div');
+            previewElement.classList.add('relative', 'h-48', 'w-full', 'rounded', 'overflow-hidden', 'shadow-md');
+
+            // Add an image or video tag depending on file type
+            if (file.type.startsWith('image/')) {
+                previewElement.innerHTML = `<img src="${e.target.result}" alt="${file.name}" class="object-cover h-full w-full">`;
+            } else if (file.type.startsWith('video/')) {
+                previewElement.innerHTML = `<video src="${e.target.result}" controls class="object-cover h-full w-full"></video>`;
+            }
+
+            previewContainer.appendChild(previewElement);
+        };
+
+        reader.readAsDataURL(file);
+    });
+});
+
     </script>
     
 </x-home-layout>

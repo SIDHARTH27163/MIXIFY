@@ -35,10 +35,14 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        // Generate an avatar URL using a service
+        $avatar = 'https://ui-avatars.com/api/?name=' . urlencode($request->name) . '&background=random&size=128';
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'avatar' => $avatar,
         ]);
 
         event(new Registered($user));

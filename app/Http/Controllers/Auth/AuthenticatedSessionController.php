@@ -40,7 +40,7 @@ class AuthenticatedSessionController extends Controller
         return redirect()->route('two-factor.login');
     }
 
-    return redirect()->intended(route('dashboard', absolute: false));
+    return redirect()->intended(route('home', absolute: false));
 
         // Redirect to the intended page if 2FA is not enabled
         // return redirect()->intended(route('dashboard', absolute: false));

@@ -11,7 +11,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="dark:bg-gray-950 bg-gray-50">
+    <body class="dark:bg-gray-950 bg-gray-50 scrollbar ">
      
 
     <div class="h-screen w-screen flex overflow-y-auto">
@@ -149,7 +149,7 @@
         </aside>
     
         <div class="flex-1 flex flex-col">
-            <nav class=" flex justify-between bg-white dark:bg-gray-950 h-auto py-2">
+            <nav class=" flex justify-between bg-white dark:bg-gray-950 h-auto py-2 px-2">
                 <!-- top bar -->
     
                
@@ -196,8 +196,8 @@
                     <li class="h-8 w-8">
                         <img
                             class="h-full w-full rounded-full mx-auto"
-                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                            alt="profile woman" />
+                            src="{{ Auth::user()->avatar }}"
+                            alt="{{ Auth::user()->name }}" />
                     </li>
     
                 </ul>
