@@ -5,6 +5,7 @@ use Modules\Posts\Http\Controllers\PostsController;
 use Modules\Posts\Http\Controllers\CreatePostsController;
 
 Route::middleware(['auth'])->prefix('posts')->name('posts.')->group(function () {
+    
     // Fix the resource route
     Route::resource('/home', PostsController::class)->parameters(['' => 'post'])->names([
         'index' => 'index',

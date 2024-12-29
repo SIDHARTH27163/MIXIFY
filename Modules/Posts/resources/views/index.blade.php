@@ -233,7 +233,25 @@
                               </div>
                           </div>
                           <div class="flex flex-col justify-end">
-                          <a class="text-indigo-600">Follow</a>
+                          
+
+                          @if (auth()->user()->id !== $user->id)
+                            @if (auth()->user()->isFollowing($user))  <!-- Custom function to check if following -->
+                                <form action="{{ route('unfollow', $user->id) }}" method="POST">
+                                    @csrf
+                                    <x-secondary-button>
+                                      {{ __('unfollow') }}
+                                  </x-secondary-button>
+                                </form>
+                            @else
+                                <form action="{{ route('follow', $user->id) }}" method="POST">
+                                    @csrf
+                                    <x-primary-button>
+                                      {{ __('follow') }}
+                                  </x-primary-button>
+                                </form>
+                            @endif
+                        @endif
                           </div>
                       </div>
                       
